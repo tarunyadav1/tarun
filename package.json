@@ -1,9 +1,8 @@
 {
-  "name": "marguerite-roth-site-and-writing",
-  "private": true,
-  "description": "Marguerite Roth's personal site and blog.",
+  "name": "Tarun-yadav",
+  "description": "Tarun Yadav's personal site and blog.",
   "version": "0.1.0",
-  "author": "Marguerite Roth | marguerite.io | @marrrguerite",
+  "author": "Tarun Yadav | marguerite.io | @tarunyadav9761",
   "dependencies": {
     "@emotion/core": "^10.0.10",
     "@emotion/styled": "^10.0.12",
@@ -100,8 +99,7 @@
     "format": "prettier --write src/**/*.{js,jsx}",
     "start": "npm run develop",
     "serve": "gatsby serve",
-    "noIndex": "npm run build && echo 'User-agent: *\nDisallow: /' > public/robots.txt",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\""
+    "noIndex": "npm run build && echo 'User-agent: *\nDisallow: /' > public/robots.txt"
   },
   "repository": {
     "type": "git",
