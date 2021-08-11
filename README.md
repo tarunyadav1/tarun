@@ -1,8 +1,9 @@
 ## Personal Site and Portfolio
 
-[marguerite.io](https://marguerite.io)
+[tarun1729.tech](https://tarun1729.tech)
 
 **Tech:**
+
 - React
 - Gatsby
 - SCSS
