@@ -59,7 +59,6 @@ const Home = () => (
           key={key}
         />
       ))}
-      {/* <ProjectCrochet /> */}
       <BookshelfContainer />
     </MaxWidth>
   </Layout>

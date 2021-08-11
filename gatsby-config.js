@@ -3,7 +3,7 @@ module.exports = {
     title: `Tarun Yadav |  Developer`,
     description: `Personal site for Tarun Yadav`,
     author: `Tarun Yadav| tarun1729.tech | @tarunyadav9761`,
-    siteUrl: "https://marguerite.io",
+    siteUrl: "https://tarun1729.tech",
     image: `https://marguerite.io/og-image.png`,
     twitterImage: `https://marguerite.io/twitter-image.png`,
     keywords: `web development, design, data, product, visualization, dashboard, analytics, currents, parse.ly, visual`,
