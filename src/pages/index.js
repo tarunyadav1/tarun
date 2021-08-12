@@ -1,6 +1,5 @@
 import React from "react"
 import Link from "components/_ui/Link/Link"
-import ContestantHead from "components/Bachelor/ContestantHead"
 import Intro from "components/Intro/Intro"
 import Layout from "components/Layout/Layout"
 import MaxWidth from "components/_ui/MaxWidth/MaxWidth"

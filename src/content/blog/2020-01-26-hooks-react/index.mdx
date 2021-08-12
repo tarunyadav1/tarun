@@ -1,0 +1,249 @@
+---
+slug: set-up-local-website
+title: "Beginners Guide To React Hooks : Getting Started With React Hooks🔥🔥"
+date: 2020-01-26
+section: "tutorial"
+isFeatured: false
+intro: "Learn how to spin up a local web development environment for HTML, CSS, JS. This will allow you to play with new tools, languages, or any kind of web project you want to work on."
+goals: "./objectives.mdx"
+demoUrl: "false"
+projectRepo: ""
+# ogimage: "./ogimage.png"
+# twitterimage: "./twitterimage.png"
+---
+
+import PostNote from "components/PostNote/PostNote"
+import Link from "components/_ui/Link/Link"
+
+<!--
+import PostLinks from 'components/Post/PostLinks'
+import PostTOC from 'components/Post/PostTOC'
+import Emoji from 'components/_ui/Emoji/Emoji'
+-->
+
+<!-- prettier-ignore -->
+
+<br />
+<br />
+
+
+This is a beginners guide to react hooks. It will take time to go through this guide, so grab a cup of coffee or whatever you like. 
+
+
+###  Table of Contents
+1. [  What are Hooks? ](#intro)  
+2. [What's wrong with classes? ](#wrongclasses)  
+3. [React's State Hooks](#reactstate)
+4. [What is this useState() syntax?](#usestatesyntax)
+5. [What does useState() give us?](#usestategive)
+6. [Using Multiple State Hooks](#multiplehooks)
+7. [React's Effect Hook](#effecthooks)
+8. [Running an Effect Hook only when something changes](#effecthooks2)
+
+  
+<a name="intro"></a>  
+
+## 1. What are Hooks?
+
+Hooks are the new feature introduced in the React 16.8 version. It allows you to use state and other React features without writing a class. Hooks are the functions which "hook into" React state and lifecycle features from function components. **It does not work inside classes.**
+
+Don't worry though, **classes aren't being removed or discouraged**. React's Developers being given more ways to code!
+
+
+<a name="wrongclasses"></a>  
+
+## 2. What's wrong with classes?
+
+
+The React Hooks intro gives a good section on this: [Check Docs](https://reactjs.org/docs/hooks-intro.html#its-hard-to-reuse-stateful-logic-between-components).    
+There are couple of problem with Classes  
+
+>### It’s hard to reuse stateful logic between components.
+
+React doesn’t offer a way to “attach” reusable behavior to a component. With Hooks, you can extract stateful logic from a component so it can be tested independently and reused. 
+**Hooks allow you to reuse stateful logic without changing your component hierarchy.** This makes it easy to share Hooks among many components or with the community.
+>###  Classes confuse both people and machines
+ 
+The gist is classes can sometimes be confusing and can be written any number of ways. Dive into somebody else's project and you could be in for a world of different syntax and style choices.
+ By allowing classes to be converted into smaller functional components, we can even further break out parts of our application into **smaller and more focused components**.
+
+<a name="reactstate"></a>  
+
+## 3. React's State Hooks
+Hook state is the new way of declaring a state in React app. Hook uses `useState() ` functional component for setting and retrieving state.
+
+Let's say we have a component like this:
+
+Let's say we have a component like this:
+
+```javascript
+import React from 'react';
+
+class Example extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0
+    };
+  }
+
+  render() {
+    return (
+      <div>
+        <p>You clicked {this.state.count} times</p>
+        <button onClick={() => this.setState({ count: this.state.count + 1 })}>
+          Click me
+        </button>
+      </div>
+    );
+  }
+}
+```
+This component will count the click on button.
+
+With React Hooks, we are able to condense that class into this functional component:
+
+```javascript
+import React, { useState } from 'react';
+
+function Example() {
+  // Declare a new state variable, which we'll call "count"  const [count, setCount] = useState(0);
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>
+        Click me
+      </button>
+    </div>
+  );
+}
+```
+
+Notice how much easier the functional component would be for beginners just learning React.
+
+<a name="usestatesyntax"></a>  
+
+## 4. What is this useState() syntax
+
+```javascript
+import React, { useState } from 'react';
+
+function Example() {
+  // Declare a new state variable, which we'll call "count"  
+  const [count, setCount] = useState(0);
+```
+**What does calling `useState` do?**
+ It declares a “state variable”. Our variable is called `count` but we could call it anything else, like `state`.
+ 
+ **What do we pass to `useState` as an argument?** 
+ The only argument to the `useState()` Hook is the initial state. In Classes the state should be Object, but in Hooks it does not need to be Object. We can keep a number or a string if that’s all we need. In our example,`0` is the initial state.
+### What Do Square Brackets Mean?
+
+You might have noticed the square brackets when we declare a state variable:
+
+```javascript
+  const [count, setCount] = useState(0);
+```
+This JavaScript syntax is called [“array destructuring”](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Array_destructuring). It means that we’re making two new variables `count` and `setCount`, where `count` is set to the first value returned by `useState`, and `setCount` is the second.
+
+<a name="usestategive"></a>  
+
+## 5. What does useState() give us?
+`useState` gives us two variables and we can name our two variables whatever we want. Just know that:
+
+1.  The first variable is the **value**. Similar to `this.state`
+2.  The second variable is a **function to update** that value. Similar to `this.setState`
+
+The final part to useState is the argument that we pass to it. **The useState argument is the initial state value.** In the case of our counter, we started at 0.
+
+<a name="multiplehooks"></a>  
+
+## 6. Using Multiple State Hooks
+We can even use `useState()` multiple times in the same function.
+```javascript
+function ExampleWithManyStates() {
+  const [age, setAge] = useState(42);
+  const [fruit, setFruit] = useState('banana');
+  const [todos, setTodos] = useState([{ text: 'Learn Hooks' }]);
+```
+
+<a name="effecthooks"></a>  
+
+## 7. React's Effect Hook
+
+The _Effect Hook_ lets you perform side effects in function components. It does not use components lifecycle methods which are available in class components. In other words, Effects Hooks are equivalent to `componentDidMount()`, `componentDidUpdate()` and `componentWillUnmount()` lifecycle methods.
+
+
+Side-effects are things you want your application to make like:
+
+-   Fetching data
+-   Manually changing the DOM (document title)
+-   Setting up a subscription
+
+
+>Effects will run after every render, including the first render.
+
+Let's compare a class to a functional component:
+
+```javascript
+import React, { Component } from 'react';
+
+class Example extends Component {
+  componentDidMount() {
+    console.log('this is componentDidMount!');
+    document.title = 'changeTitle';
+  }
+
+  render() {
+    return <div>stuff goes here</div>;
+  }
+}
+```
+
+When using the the Effect Hook, we use `useEffect()`:
+
+```javascript
+function Example() {
+  useEffect(() => {
+    console.log('this is useEffect ');
+    document.title = 'changeTitle';
+  });
+
+  return <div>stuff goes here</div>;
+}
+```
+
+<a name="effecthooks2"></a>  
+
+## 8. Running an Effect Hook only when something changes
+Since `useEffect()` runs every time a component renders, how do we get it to only run once, on mount? The Effect Hook can **take a second argument**, an array. It will look through the array and **only run the effect if one of those values has changed**.
+
+#### componentDidMount: Runs once
+
+```javascript
+// only run on mount. pass an empty array
+useEffect(() => {
+  // only runs once
+}, []);
+```
+
+#### componentDidUpdate: Runs on changes
+
+```javascript
+// only run if count changes
+useEffect(
+  () => {
+    // run here if count changes
+  },
+  [count]
+);
+```  
+
+Now, you have some understanding of hooks and how they work. If you want to learn hooks in-depth, you should check the official docs by React's Developers. 
+
+
+
+
+<br/>
+
+That's it! Let me know how it goes and don't hesitate to reach out if you have any questions.

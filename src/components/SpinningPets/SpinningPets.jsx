@@ -6,7 +6,7 @@ import "./SpinningPets.scss"
 
 class SpinningPets extends Component {
   constructor(props) {
-    // super(props);
+    super(props);
     this.state = {
       pets: ["nibbler", "oscar", "lady"],
       currentPet: null,

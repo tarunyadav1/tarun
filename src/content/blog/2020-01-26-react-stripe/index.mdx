@@ -1,0 +1,187 @@
+---
+slug: set-up-local-website
+title: "Step-By-Step Guide to Stripe Payments in React"
+date: 2020-06-28
+section: "tutorial"
+isFeatured: false
+intro: "When you first build a Stripe integration, the advantage of Checkout.js over Stripe.js is its ease of integration and speed to a working app. However, it does not allow adding any additional input fields."
+goals: "./objectives.mdx"
+demoUrl: "false"
+projectRepo: ""
+# ogimage: "./ogimage.png"
+# twitterimage: "./twitterimage.png"
+---
+
+import PostNote from "components/PostNote/PostNote"
+import Link from "components/_ui/Link/Link"
+
+<!--
+import PostLinks from 'components/Post/PostLinks'
+import PostTOC from 'components/Post/PostTOC'
+import Emoji from 'components/_ui/Emoji/Emoji'
+-->
+
+<!-- prettier-ignore -->
+
+<br />
+<br />
+
+
+When you first build a Stripe integration, the advantage of Checkout.js over Stripe.js is its ease of integration and speed to a working app. However, it does not allow adding any additional input fields. In many situations, you'll want to collect other values such as Quantity, a drop down of products, shipping address, etc, and submit it with the same form that collects payment details. Or perhaps, you really just want a uniform style with the rest of your app that doesn't require a modal dialog to popup. Stripe’s smaller frontend library, called Stripe.js, does not include any UI elements but has all of the client side API functionality of generating payment tokens. Customizing the payment form will require no changes to the backend functionality of your Node.js app, because the front end will still be generating the same payment token.
+
+## Brief Overview of Checkout.js Functionality
+
+If you've never integrated Stripe before, or it's been a while since you've done it, let's review just what the purpose is of the front end portion of Stripe! Stripe is an API as a Service, so your first question may be, "Why on earth does an API require the use of a front-end JavaScript library?" Great question! As you can imagine, handling your users' credit card information online is a potentially risky business - which is exactly why there is a security standard that you must adhere to in order to accept payments online. The Payment Card Industry Digital Security Standards (or PCI DSS, commonly just referred to as PCI for short), explicitly prohibits direct storing of credit card numbers by merchants - unless you are up to the task of "protecting stored cardholder data." Stripe's ingenuity was to build a simple front end mechanism that collects the cardholder payment data on your behalf so that it never even touches your server - **making PCI-DSS compliance much easier**. 
+
+Checkout.js bundles the cardholder data collection mechanism with a beautiful and easy to integrate modal popup form that collects that payment details from the user. This is a fantastic option for putting together a very quick Stripe integration, but will not seamlessly flow with the rest of your user interface. This is where Stripe.js come into play. The API still offers JavaScript methods for sending the payment details directly to Stripe, and receiving a payment token to represent the payment.
+
+## Installing Stripe.js
+
+The [Stripe documentation lists](https://stripe.com/docs/custom-form) provides a Script tag that loads Stripe.js with the latest version. It may be tempting to install the Script with Bower by running `bower install --save stripe.js=https://js.stripe.com/v2/`, but keep in mind doing this is not officially endorsed by Stripe. There is no mention as to how often they update the client side libraries, so something may break on you unexpectedly. So your first option is to simply load the library by placing the Stripe provided script tag in the HTML file that your React app is mounted in:
+
+``` html
+<html>
+    <head>
+               <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+    </head>
+    <body style="margin: 0px;">
+        <div id="main"></div>
+        <script src="react-bundle.js"></script>
+    </body>
+<html>
+```
+A _much_ better option would be to dynamically load this script with ReactScriptLoader! Considering a React app is a Single Page App, there are likely huge chunks of your app that do not have a payment form. Why load Stripe.js for the entire page when we can simply load it for just the payment form component? Let's make an empty React component for our payment form and dynamically load Stripe.js (note, this method would work just as well for Checkout.js!):
+
+``` javaScript
+var React = require('react');
+var ReactScriptLoaderMixin = require('react-script-loader').ReactScriptLoaderMixin;
+
+var PaymentForm = React.createClass({
+  mixins: [ ReactScriptLoaderMixin ],
+
+  getInitialState: function() {
+    return {
+      stripeLoading: true,
+      stripeLoadingError: false
+    };
+  },
+
+  getScriptURL: function() {
+    return 'https://js.stripe.com/v2/';
+  },
+
+  onScriptLoaded: function() {
+    if (!PaymentForm.getStripeToken) {
+
+      // Put your publishable key here
+      Stripe.setPublishableKey('pk_test_xxxx');
+      this.setState({ stripeLoading: false, stripeLoadingError: false });
+    }
+  },
+
+  onScriptError: function() {
+    this.setState({ stripeLoading: false, stripeLoadingError: true });
+  },
+
+  render: function() {
+    if (this.state.stripeLoading) {
+      return <div>Loading</div>;
+    }
+    else if (this.state.stripeLoadingError) {
+      return <div>Error</div>;
+    }
+    else {
+      return <div>Loaded!</div>;
+    }
+  }
+});
+
+module.exports = PaymentForm;
+```
+
+The ReactScriptLoaderMixin begins loading the remote script, and upon successfully loading it, or reaching an error, will invoke one of two event listeners. Once the script is successfully loaded, we can set the public key for Stripe.js. This in turn, gives us a conditional in the render function for three states of loading, errored, or loaded! Note that this method can also be used to load Checkout.js.
+
+## Building the Form
+
+Now we have a React component with Stripe.js loaded, let's start building the custom payment form. At minimum, we need to collect four values for Stripe to generate a payment token for us: credit card number, expiration month, expiration year, and the cvc.
+
+```javascript
+var React = require('react');
+var ReactScriptLoaderMixin = require('react-script-loader').ReactScriptLoaderMixin;
+
+var PaymentForm = React.createClass({
+  mixins: [ ReactScriptLoaderMixin ],
+
+  getInitialState: function() {
+    return {
+      stripeLoading: true,
+      stripeLoadingError: false,
+      submitDisabled: false,
+      paymentError: null,
+      paymentComplete: false,
+      token: null
+    };
+  },
+
+  getScriptURL: function() {
+    return 'https://js.stripe.com/v2/';
+  },
+
+  onScriptLoaded: function() {
+    if (!PaymentForm.getStripeToken) {
+      // Put your publishable key here
+      Stripe.setPublishableKey('pk_test_xxxx');
+
+      this.setState({ stripeLoading: false, stripeLoadingError: false });
+    }
+  },
+
+  onScriptError: function() {
+    this.setState({ stripeLoading: false, stripeLoadingError: true });
+  },
+
+  onSubmit: function(event) {
+    var self = this;
+    event.preventDefault();
+    this.setState({ submitDisabled: true, paymentError: null });
+    // send form here
+    Stripe.createToken(event.target, function(status, response) {
+      if (response.error) {
+        self.setState({ paymentError: response.error.message, submitDisabled: false });
+      }
+      else {
+        self.setState({ paymentComplete: true, submitDisabled: false, token: response.id });
+        // make request to your server here!
+      }
+    });
+  },
+
+  render: function() {
+    if (this.state.stripeLoading) {
+      return <div>Loading</div>;
+    }
+    else if (this.state.stripeLoadingError) {
+      return <div>Error</div>;
+    }
+    else if (this.state.paymentComplete) {
+      return <div>Payment Complete!</div>;
+    }
+    else {
+      return (<form onSubmit={this.onSubmit} >
+        <span>{ this.state.paymentError }</span><br />
+        <input type='text' data-stripe='number' placeholder='credit card number' /><br />
+        <input type='text' data-stripe='exp-month' placeholder='expiration month' /><br />
+        <input type='text' data-stripe='exp-year' placeholder='expiration year' /><br />
+        <input type='text' data-stripe='cvc' placeholder='cvc' /><br />
+        <input disabled={this.state.submitDisabled} type='submit' value='Purchase' />
+      </form>);
+    }
+  }
+});
+
+module.exports = PaymentForm;
+```
+
+Once Stripe.js is loaded, our payment form component returns a form with the required input fields. We’ve added the required data-stripe attributes per the Stripe documentation. The form onSubmit event invokes a handler on our component which calls Stripe.createToken(). If an error is returned, we display that to our users by setting state.paymentError equal to the error message. Otherwise, we set the payment is complete with 
+
+That's it! Let me know how it goes and don't hesitate to reach out if you have any questions.
