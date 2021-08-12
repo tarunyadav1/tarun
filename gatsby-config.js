@@ -6,7 +6,7 @@ module.exports = {
     siteUrl: "https://tarun1729.tech",
     image: `https://marguerite.io/og-image.png`,
     twitterImage: `https://marguerite.io/twitter-image.png`,
-    keywords: `web development, design, data, product, visualization, dashboard, analytics, currents, parse.ly, visual`,
+    keywords: `web development, React, NextJs , product , analytics, visual`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -18,12 +18,12 @@ module.exports = {
     `gatsby-plugin-remove-trailing-slashes`,
     `gatsby-plugin-emotion`,
     `gatsby-remark-autolink-headers`,
-    {
-      resolve: `gatsby-plugin-canonical-urls`,
-      options: {
-        siteUrl: `https://marguerite.io`,
-      },
-    },
+    // {
+    //   resolve: `gatsby-plugin-canonical-urls`,
+    //   options: {
+    //     siteUrl: `https://tarun1729.tech`,
+    //   },
+    // },
     // {
     //     resolve: `gatsby-plugin-layout`,
     //     options: {
@@ -104,13 +104,13 @@ module.exports = {
         ],
       },
     },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `images`,
-        path: `${__dirname}/src/images`,
-      },
-    },
+    // {
+    //   resolve: `gatsby-source-filesystem`,
+    //   options: {
+    //     name: `images`,
+    //     path: `${__dirname}/src/images`,
+    //   },
+    // },
     // {
     //   resolve: `gatsby-source-filesystem`,
     //   options: {
@@ -153,13 +153,13 @@ module.exports = {
     //     icon: `src/images/oscar-icon.png`, // This path is relative to the root of the site.
     //   },
     // },
-    {
-      resolve: `gatsby-plugin-google-analytics`,
-      options: {
-        trackingId: process.env.GOOGLE_ANALYTICS_TRACKING_ID || "none",
-        head: true,
-      },
-    },
+    // {
+    //   resolve: `gatsby-plugin-google-analytics`,
+    //   options: {
+    //     trackingId: process.env.GOOGLE_ANALYTICS_TRACKING_ID || "none",
+    //     head: true,
+    //   },
+    // },
     {
       resolve: `gatsby-transformer-remark`,
       options: {
@@ -177,13 +177,13 @@ module.exports = {
     `gatsby-plugin-lodash`,
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-remove-serviceworker`,
-    {
-      resolve: `gatsby-plugin-parsely-analytics`,
-      options: {
-        apikey: `marguerite.io`,
-        enableInDevelopment: false, // send page views when NODE_ENV !== prod
-      },
-    },
+    // {
+    //   resolve: `gatsby-plugin-parsely-analytics`,
+    //   options: {
+    //     apikey: `marguerite.io`,
+    //     enableInDevelopment: false, // send page views when NODE_ENV !== prod
+    //   },
+    // },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,

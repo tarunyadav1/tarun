@@ -1,19 +1,17 @@
 import React from "react"
-import classNames from 'classnames'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGithub } from '@fortawesome/free-brands-svg-icons'
+import classNames from "classnames"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faGithub } from "@fortawesome/free-brands-svg-icons"
 import Link from "components/_ui/Link/Link"
-import PropTypes from 'prop-types';
-import './PostDetail.scss';
+import PropTypes from "prop-types"
+import "./PostDetail.scss"
 
-
-const PostDetail = ({date, demoUrl, projectRepo, className}) => {
-    return (
-        <div
-            className={classNames("PostDetail__container", className)}>
-            <div className="PostDetail">
-                <div className="PostDetail__item">
-                    <Link
+const PostDetail = ({ date, demoUrl, projectRepo, className }) => {
+  return (
+    <div className={classNames("PostDetail__container", className)}>
+      <div className="PostDetail">
+        <div className="PostDetail__item">
+          {/* <Link
                         className="PostDetail__item__button"
                         isButton
                         doOpenInNewTab
@@ -29,19 +27,16 @@ const PostDetail = ({date, demoUrl, projectRepo, className}) => {
                             icon={faGithub}
                         />
                         Project Github files
-                    </Link>
-                </div>
-                <div className="PostDetail__item">
-                    <div className="PostDetail__item__date">
-                        Updated {date}
-                    </div>
-                </div>
-            </div>
+                    </Link> */}
         </div>
-    );
-};
+        <div className="PostDetail__item">
+          <div className="PostDetail__item__date">Updated {date}</div>
+        </div>
+      </div>
+    </div>
+  )
+}
 
-PostDetail.propTypes = {
-};
+PostDetail.propTypes = {}
 
-export default PostDetail;
+export default PostDetail
