@@ -7,7 +7,6 @@ import Link from "components/_ui/Link/Link"
 import Label from "components/_ui/Label/Label"
 import classNames from "classnames"
 import PropTypes from "prop-types"
-import videoCurrents from "content/work/2019-11-25-currents/currents-info.mp4"
 import "./Project.scss"
 
 const Project = ({
@@ -116,24 +115,25 @@ const Project = ({
                     alt="Project"
                   />
                 ) : (
-                  <div
-                    className={classNames(
-                      "Project__image Project__image--currents",
-                      {
-                        "Project__image--hasBorder": hasImageBorder,
-                      }
-                    )}
-                  >
-                    <video
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      poster="./currents-info-map.png"
-                    >
-                      <source src={videoCurrents} type="video/mp4" />
-                    </video>
-                  </div>
+                  // <div
+                  //   className={classNames(
+                  //     "Project__image Project__image--currents",
+                  //     {
+                  //       "Project__image--hasBorder": hasImageBorder,
+                  //     }
+                  //   )}
+                  // >
+                  //   <video
+                  //     autoPlay
+                  //     loop
+                  //     muted
+                  //     playsInline
+                  //     poster="./currents-info-map.png"
+                  //   >
+                  //     <source src={videoCurrents} type="video/mp4" />
+                  //   </video>
+                  // </div>
+                  ""
                 )}
                 {demo && (
                   <div className="Project__image__action">

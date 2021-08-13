@@ -109,28 +109,31 @@ export const query = graphql`
           }
         }
         date(formatString: "MMMM D, YYYY")
-        featuredImage {
-          childImageSharp {
-            fluid(maxWidth: 2500) {
-              ...GatsbyImageSharpFluid
-            }
-          }
-        }
-        ogimage {
-          childImageSharp {
-            fixed {
-              src
-            }
-          }
-        }
-        twitterimage {
-          childImageSharp {
-            fixed {
-              src
-            }
-          }
-        }
       }
     }
   }
 `
+
+// featuredImage {
+//           childImageSharp {
+//             fluid(maxWidth: 2500) {
+//               ...GatsbyImageSharpFluid
+//             }
+//           }
+//         }
+// ogimage {
+//           childImageSharp {
+//             fixed {
+//               src
+//             }
+//           }
+//         }
+
+//
+// twitterimage {
+//   childImageSharp {
+//     fixed {
+//       src
+//     }
+//   }
+// }
