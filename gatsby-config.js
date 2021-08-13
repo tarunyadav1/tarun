@@ -4,8 +4,8 @@ module.exports = {
     description: `Personal site for Tarun Yadav`,
     author: `Tarun Yadav| tarun1729.tech | @tarunyadav9761`,
     siteUrl: "https://tarun1729.tech",
-    image: `https://marguerite.io/og-image.png`,
-    twitterImage: `https://marguerite.io/twitter-image.png`,
+    // image: `https://marguerite.io/og-image.png`,
+    // twitterImage: `https://marguerite.io/twitter-image.png`,
     keywords: `web development, React, NextJs , product , analytics, visual`,
   },
   plugins: [
@@ -118,13 +118,13 @@ module.exports = {
     //     path: `${__dirname}/src/components/Bachelor/images`,
     //   },
     // },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        path: `${__dirname}/src/content/work`,
-        name: `work`,
-      },
-    },
+    // {
+    //   resolve: `gatsby-source-filesystem`,
+    //   options: {
+    //     path: `${__dirname}/src/content/work`,
+    //     name: `work`,
+    //   },
+    // },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
