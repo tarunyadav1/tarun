@@ -18,18 +18,19 @@ module.exports = {
     `gatsby-plugin-remove-trailing-slashes`,
     `gatsby-plugin-emotion`,
     `gatsby-remark-autolink-headers`,
-    // {
-    //   resolve: `gatsby-plugin-canonical-urls`,
-    //   options: {
-    //     siteUrl: `https://tarun1729.tech`,
-    //   },
-    // },
-    // {
-    //     resolve: `gatsby-plugin-layout`,
-    //     options: {
-    //         component: require.resolve(`./src/components/Layout/Layout.jsx`),
-    //     },
-    // },
+    {
+      resolve: `gatsby-plugin-canonical-urls`,
+      options: {
+        siteUrl: `https://tarun1729.tech`,
+        stripQueryString: true,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-layout`,
+      options: {
+        component: require.resolve(`./src/components/Layout/Layout.jsx`),
+      },
+    },
     {
       resolve: `gatsby-plugin-mdx`,
       options: {
@@ -104,13 +105,13 @@ module.exports = {
         ],
       },
     },
-    // {
-    //   resolve: `gatsby-source-filesystem`,
-    //   options: {
-    //     name: `images`,
-    //     path: `${__dirname}/src/images`,
-    //   },
-    // },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `images`,
+        path: `${__dirname}/src/images`,
+      },
+    },
     // {
     //   resolve: `gatsby-source-filesystem`,
     //   options: {
@@ -132,34 +133,27 @@ module.exports = {
         name: `blog`,
       },
     },
-    // {
-    //   resolve: `gatsby-source-filesystem`,
-    //   options: {
-    //     path: `${__dirname}/src/content/blog`,
-    //     name: `blog`,
-    //   },
-    // },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    // {
-    //   resolve: `gatsby-plugin-manifest`,
-    //   options: {
-    //     name: `rose madder`,
-    //     short_name: `rose`,
-    //     start_url: `/`,
-    //     background_color: `#663399`,
-    //     theme_color: `#663399`,
-    //     display: `minimal-ui`,
-    //     icon: `src/images/oscar-icon.png`, // This path is relative to the root of the site.
-    //   },
-    // },
-    // {
-    //   resolve: `gatsby-plugin-google-analytics`,
-    //   options: {
-    //     trackingId: process.env.GOOGLE_ANALYTICS_TRACKING_ID || "none",
-    //     head: true,
-    //   },
-    // },
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `Tarun Yadav`,
+        short_name: `tarun`,
+        start_url: `/`,
+        background_color: `#663399`,
+        theme_color: `#663399`,
+        display: `minimal-ui`,
+        //icon: `src/images/oscar-icon.png`, // This path is relative to the root of the site.
+      },
+    },
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: process.env.GOOGLE_ANALYTICS_TRACKING_ID || "none",
+        head: true,
+      },
+    },
     {
       resolve: `gatsby-transformer-remark`,
       options: {
