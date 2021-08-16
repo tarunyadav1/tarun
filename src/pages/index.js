@@ -1,5 +1,5 @@
 import React from "react"
-import Link from "components/_ui/Link/Link"
+// import Link from "components/_ui/Link/Link"
 import Intro from "components/Intro/Intro"
 import Layout from "components/Layout/Layout"
 import MaxWidth from "components/_ui/MaxWidth/MaxWidth"

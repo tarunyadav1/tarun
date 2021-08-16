@@ -9,13 +9,13 @@ import Link from "components/_ui/Link/Link"
 import PostDetail from "components/PostDetail/PostDetail"
 import Objectives from "components/Objectives/Objectives"
 import MaxWidth from "components/_ui/MaxWidth/MaxWidth"
-import TOC from "components/TOC/TOC"
+// import TOC from "components/TOC/TOC"
 import SEO from "components/SEO/SEO"
 import "./Post.scss"
 
 export default ({ data }) => {
   let Post = data.mdx
-  let slug = Post.frontmatter.slug
+  // let slug = Post.frontmatter.slug
   //let featuredImgFluid = Post.frontmatter.featuredImage.childImageSharp.fluid
   let goals = Post.frontmatter.goals.childMdx
   let demoUrl = Post.frontmatter.demoUrl
