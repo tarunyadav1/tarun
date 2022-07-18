@@ -1,6 +1,6 @@
 ## Personal Site and Portfolio
 
-[tarun1729.tech](https://tarun1729.tech)
+[tarun1729.tech](https://tarunyadav.xyz)
 
 **Tech:**
 
